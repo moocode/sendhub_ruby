@@ -3,7 +3,6 @@ require 'action_mailer'
 module SendhubMethods
   def perform_delivery_sendhub(message)
     client = Sendhub::Client.new(
-      :host => 'localhost:3001',
       :api_key => SENDHUB_API_KEY,
       :secret_key => SENDHUB_SECRET_KEY
     )
