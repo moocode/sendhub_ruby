@@ -2,7 +2,19 @@ require 'action_mailer'
 
 module SendhubMethods
   def perform_delivery_sendhub(message)
-    #Sendhub.send_through_sendhub(message)
+    client = Sendhub::Client.new(
+      :host => 'localhost:3001',
+      :api_key => SENDHUB_API_KEY,
+      :secret_key => SENDHUB_SECRET_KEY
+    )
+    res = client.send_email(
+      :from => message.from,
+      :to => message.to,
+      :subject => message.subject,
+      :body => message.body
+    )
+    
+    puts res.inspect
   end
 
   def tag(value)
@@ -26,10 +38,14 @@ module SendhubMethods
     def sendhub_api_key=(value)
       #Sendhub.api_key = value
     end
+    def sendhub_secret_key=(value)
+      #Sendhub.api_key = value
+    end
   end
 
 end
 
 class ActionMailer::Base
+  puts "***** MOOOOO *****"
   include SendhubMethods
 end
