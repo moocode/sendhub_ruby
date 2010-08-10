@@ -1,5 +1,3 @@
-require 'action_mailer'
-
 module SendhubMethods
   def perform_delivery_sendhub(message)
     client = Sendhub::Client.new(
@@ -12,8 +10,6 @@ module SendhubMethods
       :subject => message.subject,
       :body => message.body
     )
-    
-    puts res.inspect
   end
 
   def tag(value)
@@ -45,6 +41,5 @@ module SendhubMethods
 end
 
 class ActionMailer::Base
-  puts "***** MOOOOO *****"
   include SendhubMethods
 end

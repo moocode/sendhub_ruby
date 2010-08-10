@@ -20,8 +20,6 @@ module Sendhub
         options.merge!(:unique => Time.now.utc.to_i)
         options.merge!(:secret => securely_hash_data(options[:unique]))
         
-        puts "Path: #{path}"
-        
         #if ssl?
           #connection.use_ssl = true
           #connection.verify_mode = OpenSSL::SSL::VERIFY_PEER

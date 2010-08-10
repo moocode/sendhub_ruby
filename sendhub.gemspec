@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sendhub}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
-  s.date = %q{2010-08-09}
+  s.date = %q{2010-08-10}
   s.description = %q{sendhub is a Ruby client library for SendHub.net.}
   s.email = %q{moomerman@gmail.com}
   s.files = ["LICENSE", "README.textile","lib/sendhub.rb"] + Dir.glob('lib/sendhub/*.rb')
@@ -18,17 +18,16 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{sendhub is a Ruby client library for SendHub.net.}
 
-  # if s.respond_to? :specification_version then
-  #     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-  #     s.specification_version = 2
-  # 
-  #     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-  #       #s.add_runtime_dependency(%q<oauth>, [">= 0.3.6"])
-  #       #s.add_development_dependency dep
-  #     else
-  #       #s.add_dependency(%q<oauth>, [">= 0.3.6"])
-  #     end
-  #   else
-  #     #s.add_dependency(%q<oauth>, [">= 0.3.6"])
-  #   end
+  if s.respond_to? :specification_version then
+      current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+      s.specification_version = 2
+  
+      if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+        s.add_runtime_dependency(%q<json>, [">= 1.1.9"])
+      else
+        s.add_dependency(%q<json>, [">= 1.1.9"])
+      end
+    else
+      s.add_dependency(%q<json>, [">= 1.1.9"])
+    end
 end

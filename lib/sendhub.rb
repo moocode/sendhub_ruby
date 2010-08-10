@@ -8,7 +8,11 @@ require 'json'
 module Sendhub
 end
 
-require 'sendhub/rails'
+if ENV['RAILS_ENV']
+  require 'action_mailer'
+  require 'sendhub/rails'
+end
+
 require 'sendhub/http'
 require 'sendhub/response'
 require 'sendhub/client'
