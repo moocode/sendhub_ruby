@@ -8,7 +8,8 @@ module SendhubMethods
       :from => message.from,
       :to => message.to,
       :subject => message.subject,
-      :body => message.body
+      :body => message.body,
+      :content_type => message.content_type
     )
   end
 
