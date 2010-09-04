@@ -8,14 +8,15 @@ require 'json'
 module Sendhub
 end
 
+require 'sendhub/http'
+require 'sendhub/response'
+require 'sendhub/client'
+
 if defined? Rails
   if Rails.version =~ /^2./
+    require 'action_mailer'
     require 'sendhub/rails2'
   elsif Rails.version =~ /^3./
     require 'sendhub/rails3'
   end
 end
-
-require 'sendhub/http'
-require 'sendhub/response'
-require 'sendhub/client'
