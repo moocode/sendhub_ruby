@@ -8,10 +8,9 @@ Create an account on "SendHub":http://sendhub.net/ to obtain your API keys
 
 h2. Simple Ruby Example
 
-<pre><code>
-client = Sendhub::Client.new(
+<pre><code>client = Sendhub::Client.new(
   :api_key => 'YOUR_API_KEY',
-  :secret_key => 'YOUR_API_SECRET'
+  :secret_key => 'YOUR_SECRET_KEY'
 )
 
 res = client.send_email(
@@ -20,4 +19,37 @@ res = client.send_email(
   :subject => 'Testing SendHub Integration',
   :body => 'Testing...'
 )
+</code></pre>
+
+h2. Rails 2.x Example
+
+config/enviroment.rb
+
+<pre><code>config.gem 'sendhub'
+require 'sendhub'
+</code></pre>
+
+config/enviroments/production.rb
+
+<pre><code>config.action_mailer.delivery_method = :sendhub
+config.action_mailer.sendhub_settings = {
+  :api_key => "YOUR_API_KEY",
+  :secret_key => "YOUR_SECRET_KEY"
+}
+</code></pre>
+
+h2. Rails 3.x Example
+
+config/enviroment.rb
+
+<pre><code>config.gem 'sendhub'
+</code></pre>
+
+config/enviroments/production.rb
+
+<pre><code>config.action_mailer.delivery_method = :sendhub
+config.action_mailer.sendhub_settings = {
+  :api_key => "YOUR_API_KEY",
+  :secret_key => "YOUR_SECRET_KEY"
+}
 </code></pre>
