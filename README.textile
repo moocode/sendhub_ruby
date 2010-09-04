@@ -1,1 +1,23 @@
 h2. The Ruby Client library for SendHub.net
+
+h2. Setup & Installation
+
+Create an account on "SendHub":http://sendhub.net/ to obtain your API keys
+
+<code>sudo gem install sendhub</code>
+
+h2. Simple Ruby Example
+
+<pre><code>
+client = Sendhub::Client.new(
+  :api_key => 'YOUR_API_KEY',
+  :secret_key => 'YOUR_API_SECRET'
+)
+
+res = client.send_email(
+  :from => 'me@example.com',
+  :to => 'you@example.com',
+  :subject => 'Testing SendHub Integration',
+  :body => 'Testing...'
+)
+</code></pre>
