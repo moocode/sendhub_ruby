@@ -8,7 +8,6 @@ module Sendhub
     end
 
     def deliver!(message)
-      puts message.inspect
       res = @client.send_email(
         :from => message.from,
         :to => message.to,
