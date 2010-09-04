@@ -1,8 +1,8 @@
 module SendhubMethods
   def perform_delivery_sendhub(message)
     client = Sendhub::Client.new(
-      :api_key => SENDHUB_API_KEY,
-      :secret_key => SENDHUB_SECRET_KEY
+      :api_key => @@sendhub_settings[:api_key],
+      :secret_key => @@sendhub_settings[:secret_key]
     )
     res = client.send_email(
       :from => message.from,
@@ -13,29 +13,13 @@ module SendhubMethods
     )
   end
 
-  def tag(value)
-    @tag = value
-  end
-
   def self.included(base)
     base.extend(ClassMethods)
-    base.class_eval do
-      alias_method_chain :create_mail, :tag
-    end
-  end
-
-  def create_mail_with_tag
-    returning create_mail_without_tag do |mail|
-      mail.tag = @tag if @tag
-    end
   end
 
   module ClassMethods
-    def sendhub_api_key=(value)
-      #Sendhub.api_key = value
-    end
-    def sendhub_secret_key=(value)
-      #Sendhub.api_key = value
+    def sendhub_settings=(options)
+      @@sendhub_settings = options
     end
   end
 
