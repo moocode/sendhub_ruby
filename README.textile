@@ -58,7 +58,7 @@ gem 'sendhub'
 
 config/enviroments/production.rb
 
-<pre><code>Three::Application.configure do
+<pre><code>YOUR_APP::Application.configure do
   ...
   config.action_mailer.delivery_method = :sendhub
   config.action_mailer.sendhub_settings = {
