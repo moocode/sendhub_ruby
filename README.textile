@@ -32,17 +32,19 @@ config/enviroment.rb
   ...
   config.gem 'sendhub'
   require 'sendhub'
- ...
+  ...
 end
 </code></pre>
 
 config/enviroments/production.rb
 
-<pre><code>config.action_mailer.delivery_method = :sendhub
+<pre><code>...
+config.action_mailer.delivery_method = :sendhub
 config.action_mailer.sendhub_settings = {
   :api_key => "YOUR_API_KEY",
   :secret_key => "YOUR_SECRET_KEY"
 }
+...
 </code></pre>
 
 h2. Rails 3.x Example
@@ -56,9 +58,13 @@ gem 'sendhub'
 
 config/enviroments/production.rb
 
-<pre><code>config.action_mailer.delivery_method = :sendhub
-config.action_mailer.sendhub_settings = {
-  :api_key => "YOUR_API_KEY",
-  :secret_key => "YOUR_SECRET_KEY"
-}
+<pre><code>Three::Application.configure do
+  ...
+  config.action_mailer.delivery_method = :sendhub
+  config.action_mailer.sendhub_settings = {
+    :api_key => "YOUR_API_KEY",
+    :secret_key => "YOUR_SECRET_KEY"
+  }
+  ...
+end
 </code></pre>
