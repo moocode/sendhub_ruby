@@ -15,8 +15,8 @@ require 'sendhub/client'
 if defined? Rails
   if Rails.version =~ /^2./
     require 'action_mailer'
-    require 'sendhub/rails2'
+    require 'sendhub/plugins/rails2'
   elsif Rails.version =~ /^3./
-    require 'sendhub/rails3'
+    require 'sendhub/plugins/rails3'
   end
 end
