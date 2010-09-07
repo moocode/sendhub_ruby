@@ -28,8 +28,12 @@ h2. Rails 2.x Example
 
 config/enviroment.rb
 
-<pre><code>config.gem 'sendhub'
-require 'sendhub'
+<pre><code>Rails::Initializer.run do |config|
+  ...
+  config.gem 'sendhub'
+  require 'sendhub'
+ ...
+end
 </code></pre>
 
 config/enviroments/production.rb
@@ -43,9 +47,11 @@ config.action_mailer.sendhub_settings = {
 
 h2. Rails 3.x Example
 
-config/enviroment.rb
+Gemfile
 
-<pre><code>config.gem 'sendhub'
+<pre><code>...
+gem 'sendhub'
+...
 </code></pre>
 
 config/enviroments/production.rb
