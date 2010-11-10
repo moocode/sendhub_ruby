@@ -1,6 +1,8 @@
 require 'uri'
 require 'net/http'
+require 'net/https'
 require 'digest/sha1'
+require 'cgi'
 
 require 'rubygems'
 require 'json'

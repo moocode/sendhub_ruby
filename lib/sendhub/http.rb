@@ -1,8 +1,8 @@
 module Sendhub
   class Client
     private
-      def _get(path)
-        http(Net::HTTP::Get, path)
+      def _get(path, options={})
+        http(Net::HTTP::Get, path, nil, options)
       end
 
       def _post(path, body = nil, options={})
@@ -20,19 +20,24 @@ module Sendhub
         options.merge!(:unique => Time.now.utc.to_i)
         options.merge!(:secret => securely_hash_data(options[:unique]))
         
-        #if ssl?
-          #connection.use_ssl = true
-          #connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
+        if @uri.scheme == 'https'
+          connection.use_ssl = true
+          connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
           #connection.ca_file = Configuration.ca_file
           #connection.verify_callback = proc { |preverify_ok, ssl_context| verify_ssl_certificate(preverify_ok, ssl_context) }
-        #end
+        end
         connection.start do |http|
-          request = http_method.new("/v1#{path}")
+          if http_method.inspect == 'Net::HTTP::Get' and !options.empty?
+            puts options.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }.join("&")
+            request = http_method.new("/v1#{path}" + "?" + (options.collect { |k,v| "#{k}=#{CGI::escape(v.to_s)}" }).join("&"))
+          else
+            request = http_method.new("/v1#{path}")
+          end
           request["Accept"] = "application/xml"
           request["User-Agent"] = 'SendhubRubyClient/'+Sendhub::Client::VERSION
           request["Accept-Encoding"] = "gzip"
           request["X-ApiVersion"] = Sendhub::Client::VERSION
-          request.basic_auth @api_key, @secret_key
+          # request.basic_auth @api_key, @secret_key
           if body
             request["Content-Type"] = "application/xml"
             request.body = body
@@ -41,6 +46,7 @@ module Sendhub
             request.set_form_data(options)
           end
           response = http.request(request)
+          puts response.body
           return JSON.parse(response.body)
         end
         

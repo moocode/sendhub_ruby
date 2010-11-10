@@ -8,6 +8,7 @@ module Sendhub
     end
 
     def deliver!(message)
+      
       res = @client.send_email(
         :from => message.from,
         :to => message.to,
@@ -15,6 +16,8 @@ module Sendhub
         :body => message.body,
         :content_type => message.content_type
       )
+      
+      puts res.inspect
     end
   end
 end
