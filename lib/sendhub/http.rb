@@ -22,7 +22,7 @@ module Sendhub
         
         if @uri.scheme == 'https'
           connection.use_ssl = true
-          connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          #connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
           #connection.ca_file = Configuration.ca_file
           #connection.verify_callback = proc { |preverify_ok, ssl_context| verify_ssl_certificate(preverify_ok, ssl_context) }
         end
