@@ -23,7 +23,7 @@ module Sendhub
         if @uri.scheme == 'https'
           connection.use_ssl = true
           connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
-          connection.ca_file = 'lib/sendhub/ca.pem'
+          connection.ca_file = File.expand_path(File.join(File.dirname(__FILE__), "ca.pem"))
           connection.verify_callback = proc { |preverify_ok, ssl_context| verify_ssl_certificate(preverify_ok, ssl_context) }
         end
         connection.start do |http|
