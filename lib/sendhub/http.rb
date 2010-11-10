@@ -22,9 +22,9 @@ module Sendhub
         
         if @uri.scheme == 'https'
           connection.use_ssl = true
-          #connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
-          #connection.ca_file = Configuration.ca_file
-          #connection.verify_callback = proc { |preverify_ok, ssl_context| verify_ssl_certificate(preverify_ok, ssl_context) }
+          connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          connection.ca_file = 'lib/sendhub/ca.pem'
+          connection.verify_callback = proc { |preverify_ok, ssl_context| verify_ssl_certificate(preverify_ok, ssl_context) }
         end
         connection.start do |http|
           if http_method.inspect == 'Net::HTTP::Get' and !options.empty?
@@ -52,13 +52,13 @@ module Sendhub
         
       end
       
-      #def verify_ssl_certificate(preverify_ok, ssl_context)
-      #  if preverify_ok != true || ssl_context.error != 0
-      #    err_msg = "SSL Verification failed -- Preverify: #{preverify_ok}, Error: #{ssl_context.error_string} (#{ssl_context.error})"
-      #    Configuration.logger.error err_msg
-      #    raise err_msg
-      #  end
-      #  true
-      #end
+      def verify_ssl_certificate(preverify_ok, ssl_context)
+       if preverify_ok != true || ssl_context.error != 0
+         err_msg = "SSL Verification failed -- Preverify: #{preverify_ok}, Error: #{ssl_context.error_string} (#{ssl_context.error})"
+         puts err_msg
+         raise err_msg
+       end
+       true
+      end
   end
 end
