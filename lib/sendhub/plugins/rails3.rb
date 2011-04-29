@@ -12,6 +12,7 @@ module Sendhub
       res = @client.send_email(
         :from => message.from,
         :to => message.to,
+        :reply_to => message.reply_to,
         :subject => message.subject,
         :body => message.body,
         :content_type => message.content_type
