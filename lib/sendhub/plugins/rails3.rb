@@ -9,16 +9,24 @@ module Sendhub
 
     def deliver!(message)
       
+      body = message.body
+      body = collect_parts(message) if message.multipart?
+      
       res = @client.send_email(
         :from => message.from,
         :to => message.to,
         :reply_to => message.reply_to,
         :subject => message.subject,
-        :body => message.body,
-        :content_type => message.content_type
+        :body => body,
+        :content_type => message.content_type,
+        :content_transfer_encoding => message.content_transfer_encoding
       )
       
       puts res.inspect
+    end
+    
+    def collect_parts(message)
+      message.parts.inject("\n\n\n") {|x, part| x << "--#{message.boundary}\n"; x << "#{part.to_s}\n\n"}
     end
   end
 end
