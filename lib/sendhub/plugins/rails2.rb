@@ -1,5 +1,5 @@
 module SendhubMethods
-  
+
   def self.included(base)
     base.extend(ClassMethods)
   end
@@ -12,7 +12,8 @@ module SendhubMethods
   def perform_delivery_sendhub(message)
     client = Sendhub::Client.new(
       :api_key => ActionMailer::Base.sendhub_settings[:api_key],
-      :secret_key => ActionMailer::Base.sendhub_settings[:secret_key]
+      :secret_key => ActionMailer::Base.sendhub_settings[:secret_key],
+      :notification_url => ActionMailer::Base.sendhub_settings[:notification_url],
     )
     res = client.send_email(
       :from => message.from,

@@ -8,18 +8,19 @@ module Sendhub
       def _post(path, body = nil, options={})
         http(Net::HTTP::Post, path, body, options)
       end
-      
+
       def securely_hash_data(data)
         Digest::SHA1.hexdigest("--#{@api_key}-#{@secret_key}-#{data}--")
       end
-      
+
       def http(http_method, path, body = nil, options={})
         connection = Net::HTTP.new(@uri.host, @uri.port)
-        
+
         options.merge!(:api_key => @api_key)
         options.merge!(:unique => Time.now.utc.to_i)
         options.merge!(:secret => securely_hash_data(options[:unique]))
-        
+        options.merge!(:notification_url => @notification_url) if @notification_url
+
         if @uri.scheme == 'https'
           connection.use_ssl = true
           connection.verify_mode = OpenSSL::SSL::VERIFY_PEER
@@ -49,9 +50,9 @@ module Sendhub
           puts response.body
           return JSON.parse(response.body)
         end
-        
+
       end
-      
+
       def verify_ssl_certificate(preverify_ok, ssl_context)
        if preverify_ok != true || ssl_context.error != 0
          err_msg = "SSL Verification failed -- Preverify: #{preverify_ok}, Error: #{ssl_context.error_string} (#{ssl_context.error})"
