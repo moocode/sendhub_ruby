@@ -1,7 +1,7 @@
 module Sendhub
   class Client
 
-    VERSION = '0.1.17'
+    VERSION = '0.1.19'
 
     def initialize(config=nil)
       config[:host] ||= 'api.sendhub.net'
