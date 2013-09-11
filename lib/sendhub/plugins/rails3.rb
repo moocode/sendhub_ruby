@@ -2,6 +2,8 @@ module Sendhub
   class Rails
     def initialize(options)
       @client = Sendhub::Client.new(
+        :host => options[:host],
+        :protocol => options[:protocol],
         :api_key => options[:api_key],
         :secret_key => options[:secret_key],
         :notification_url => options[:notification_url]
