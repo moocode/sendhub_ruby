@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sendhub}
-  s.version = "0.1.20"
+  s.version = "0.1.21"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
-  s.date = %q{2013-05-23}
+  s.date = %q{2013-11-12}
   s.description = %q{sendhub is a Ruby client library for SendHub.net.}
   s.email = %q{moomerman@gmail.com}
   s.files = ["LICENSE", "README.textile","lib/sendhub.rb","lib/sendhub/ca.pem"] + Dir.glob('lib/sendhub/*.rb') + Dir.glob('lib/sendhub/plugins/*.rb')
