@@ -2,16 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sendhub}
-  s.version = "0.1.22"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Richard Taylor"]
-  s.date = %q{2013-11-12}
+  s.date = %q{2017-01-12}
   s.description = %q{sendhub is a Ruby client library for SendHub.net.}
   s.email = %q{moomerman@gmail.com}
   s.files = ["LICENSE", "README.textile","lib/sendhub.rb","lib/sendhub/ca.pem"] + Dir.glob('lib/sendhub/*.rb') + Dir.glob('lib/sendhub/plugins/*.rb')
   s.has_rdoc = false
-  s.homepage = %q{http://sendhub.net/}
+  s.homepage = %q{https://sendhub.net/}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{sendhub}
