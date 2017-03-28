@@ -22,5 +22,7 @@ if defined? Rails
     require 'sendhub/plugins/rails3'
   elsif Rails.version =~ /^4./
     require 'sendhub/plugins/rails3'
+  elsif Rails.version =~ /^5./
+    require 'sendhub/plugins/rails3'
   end
 end
